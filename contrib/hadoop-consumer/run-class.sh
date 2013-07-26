@@ -23,12 +23,12 @@ fi
 base_dir=$(dirname $0)/../..
 
 # include kafka jars
-for file in $base_dir/core/target/scala_2.8.0/kafka-*.jar
+for file in $base_dir/core/target/scala_2.9.1-1/kafka-*.jar
 do
   CLASSPATH=$CLASSPATH:$file
 done
 
-for file in $base_dir/contrib/hadoop-consumer/lib_managed/scala_2.8.0/compile/*.jar;
+for file in $base_dir/contrib/hadoop-consumer/lib_managed/scala_2.9.1-1/compile/*.jar;
 do
   CLASSPATH=$CLASSPATH:$file
 done
@@ -36,7 +36,7 @@ done
 local_dir=$(dirname $0)
 
 # include hadoop-consumer jars
-for file in $base_dir/contrib/hadoop-consumer/target/scala_2.8.0/*.jar;
+for file in $base_dir/contrib/hadoop-consumer/target/scala_2.9.1-1/*.jar;
 do
   CLASSPATH=$CLASSPATH:$file
 done
@@ -46,7 +46,7 @@ do
   CLASSPATH=$CLASSPATH:$file
 done
 
-CLASSPATH=$CLASSPATH:$base_dir/project/boot/scala-2.8.0/lib/scala-library.jar
+CLASSPATH=$CLASSPATH:$base_dir/project/boot/scala-2.9.1-1/lib/scala-library.jar
 
 echo $CLASSPATH
 

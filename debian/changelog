@@ -1,0 +1,5 @@
+kafka-server (0.7.2-1) stable; urgency=low
+
+  * Initial release 
+
+ -- Hisham Mardam-Bey <hisham.mardambey@gmail.com>  Thu, 25 Jul 2013 20:38:43 -0400

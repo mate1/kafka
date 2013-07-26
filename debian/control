@@ -1,0 +1,16 @@
+Source: kafka-server
+Section: unknown
+Priority: extra
+Maintainer: Hisham Mardam-Bey <hisham.mardambey@gmail.com>
+Build-Depends: debhelper (>= 8.0.0)
+Standards-Version: 3.9.3
+Homepage: http://kafka.apache.org
+#Vcs-Git: git://git.debian.org/collab-maint/kafka-server.git
+#Vcs-Browser: http://git.debian.org/?p=collab-maint/kafka-server.git;a=summary
+
+Package: kafka-server
+Architecture: all
+Depends: ${misc:Depends}
+Description: Distributed durable message queuing system.
+ Apache Kafka is a distributed message queuig system
+ that uses ZooKeeper to manage brokers.
