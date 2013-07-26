@@ -1,1 +1,4 @@
-KAFKA_SERVER_START=0
+# Defaults for Kafka Server
+
+# Set to "yes" to run
+RUN=no
