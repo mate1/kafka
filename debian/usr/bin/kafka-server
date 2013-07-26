@@ -16,8 +16,8 @@
 
 export JMX_PORT=${JMX_PORT:-9999}
 
-KAFKA_OUT=/var/log/kafka/kafka.out
-
+KAFKA_OUT=/var/log/kafka/kafka-server.out
+PID_FILE=/var/run/kafka/kafka-server.pid
 for file in /usr/share/kafka/*.jar;
 do
   CLASSPATH=$CLASSPATH:$file
@@ -38,4 +38,40 @@ else
   JAVA="$JAVA_HOME/bin/java"
 fi
 
-nohup $JAVA $KAFKA_OPTS $KAFKA_JMX_OPTS -cp $CLASSPATH kafka.Kafka /etc/kafka/server.properties > "$KAFKA_OUT" 2>&1 &
+start() {
+	nohup $JAVA $KAFKA_OPTS $KAFKA_JMX_OPTS -cp $CLASSPATH kafka.Kafka /etc/kafka/server.properties > "$KAFKA_OUT" 2>&1 &
+	PID=$!
+	echo $PID > $PID_FILE
+}
+
+stop() {
+	local pid
+
+	pid=`cat "$PID_FILE" 2>/dev/null`
+
+	if [ "$pid" = '' ]; then
+		# The file probably does not exist or is empty. Success
+		return 0
+	fi
+
+	set -- $pid
+	pid="$1"
+
+	kill -15 "$pid"
+}
+
+case "$1" in
+	start)
+		start
+		;;
+
+	stop)
+		stop
+		;;
+
+	*)
+		echo "Usage: $0 (start|stop)"
+		exit 1
+		;;
+esac
+

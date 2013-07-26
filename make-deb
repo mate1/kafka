@@ -15,4 +15,4 @@ SCALA_VERSION=2.9.1-1
 
 #dpkg -b debian kafka-$VERSION.deb
 
-debuild -us -uc
+debuild -us -uc -i.git
