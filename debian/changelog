@@ -1,3 +1,9 @@
+kafka-server (0.7.2-2) stable; urgency=low
+
+  * Moved Kafka to ZooKeeper 3.4.5 and added slf4j dependencies (jars).
+
+ -- Hisham Mardam-Bey <hisham.mardambey@gmail.com>  Fri, 13 Sep 2013 14:24:49 -0400
+
 kafka-server (0.7.2-1) stable; urgency=low
 
   * Initial release 
