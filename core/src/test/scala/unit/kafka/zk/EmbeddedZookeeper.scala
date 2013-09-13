@@ -17,24 +17,31 @@
 
 package kafka.zk
 
-import org.apache.zookeeper.server.ZooKeeperServer
-import org.apache.zookeeper.server.NIOServerCnxn
 import kafka.utils.TestUtils
-import java.net.InetSocketAddress
 import kafka.utils.Utils
+import java.util.concurrent.Semaphore
+import org.apache.zookeeper.server.ZooKeeperServerMain
 
-class EmbeddedZookeeper(val connectString: String) {
-  val snapshotDir = TestUtils.tempDir()
+class EmbeddedZookeeper(val connectString: String) extends ZooKeeperServerMain {
   val logDir = TestUtils.tempDir()
-  val zookeeper = new ZooKeeperServer(snapshotDir, logDir, 3000)
-  val port = connectString.split(":")(1).toInt
-  val factory = new NIOServerCnxn.Factory(new InetSocketAddress("127.0.0.1", port))
-  factory.startup(zookeeper)
+  val port = connectString.split(":")(1)
+  val isRunning = new Semaphore(0)
+  val self = this
 
-  def shutdown() {
-    factory.shutdown()
-    Utils.rm(logDir)
-    Utils.rm(snapshotDir)
-  }
+  val zk = new Thread() {
   
+    override def run() {
+      self.initializeAndRun(Array(port, logDir.getAbsolutePath))
+      isRunning.acquire();
+    }
+  }
+
+  zk.start()
+
+  override def shutdown() {
+    Utils.rm(logDir)
+    super.shutdown()
+    isRunning.release()
+    zk.join()
+  }
 }

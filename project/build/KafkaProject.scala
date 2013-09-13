@@ -52,7 +52,7 @@ class KafkaProject(info: ProjectInfo) extends ParentProject(info) with IdeaProje
       <exclude module="jmxtools"/>
       <exclude module="mail"/>
       <exclude module="jms"/>
-      <dependency org="org.apache.zookeeper" name="zookeeper" rev="3.3.4">
+      <dependency org="org.apache.zookeeper" name="zookeeper" rev="3.4.5">
         <exclude module="log4j"/>
         <exclude module="jline"/>
       </dependency>
@@ -226,7 +226,7 @@ class KafkaProject(info: ProjectInfo) extends ParentProject(info) with IdeaProje
   trait TestDependencies {
     val easymock = "org.easymock" % "easymock" % "3.0" % "test"
     val junit = "junit" % "junit" % "4.1" % "test"
-    val scalaTest = "org.scalatest" % "scalatest" % "1.2" % "test"
+    val scalaTest = "org.scalatest" % "scalatest_2.9.1-1" % "1.6.1" % "test"
   }
 
   trait CoreDependencies {
