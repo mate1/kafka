@@ -10,7 +10,7 @@ Homepage: http://kafka.apache.org
 
 Package: kafka-server
 Architecture: all
-Depends: ${misc:Depends}
+Depends: ${misc:Depends}, sun-java6-jre
 Description: Distributed durable message queuing system.
  Apache Kafka is a distributed message queuig system
  that uses ZooKeeper to manage brokers.

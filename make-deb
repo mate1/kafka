@@ -1,7 +1,6 @@
 #!/bin/bash
 
-VERSION=0.7.2.2911
-SCALA_VERSION=2.9.1-1
+# SCALA_VERSION=2.9.1-1
 
 # copy all jars
 
@@ -13,6 +12,10 @@ SCALA_VERSION=2.9.1-1
 
 #cp debian/etc/kafka/log4j.properties debian/etc/kafka/server.properties debian/usr/share/doc/kafka
 
-#dpkg -b debian kafka-$VERSION.deb
+kafka_dir=${PWD##*/}
+
+pushd ../
+tar czvf kafka-server_0.7.2.orig.tar.gz --exclude=".git" $kafka_dir
+popd
 
 debuild -us -uc -i.git
