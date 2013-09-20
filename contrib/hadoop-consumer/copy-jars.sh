@@ -31,15 +31,15 @@ echo "$hadoop fs -mkdir $1"
 $hadoop fs -mkdir $1
 
 # include kafka jars
-for file in $base_dir/contrib/hadoop-consumer/target/scala_2.9.1-1/*.jar;
+for file in $base_dir/contrib/hadoop-consumer/target/scala_2.9.2/*.jar;
 do
    echo "$hadoop fs -put $file $1/"
    $hadoop fs -put $file $1/ 
 done
 
 # include kafka jars
-echo "$hadoop fs -put $base_dir/core/target/scala_2.9.1-1/kafka-*.jar; $1/"
-$hadoop fs -put $base_dir/core/target/scala_2.9.1-1/kafka-*.jar $1/ 
+echo "$hadoop fs -put $base_dir/core/target/scala_2.9.2/kafka-*.jar; $1/"
+$hadoop fs -put $base_dir/core/target/scala_2.9.2/kafka-*.jar $1/ 
 
 # include core lib jars
 for file in $base_dir/core/lib/*.jar;
@@ -48,15 +48,15 @@ do
    $hadoop fs -put $file $1/ 
 done
 
-for file in $base_dir/core/lib_managed/scala_2.9.1-1/compile/*.jar;
+for file in $base_dir/core/lib_managed/scala_2.9.2/compile/*.jar;
 do
    echo "$hadoop fs -put $file $1/"
    $hadoop fs -put $file $1/ 
 done
 
 # include scala library jar
-echo "$hadoop fs -put $base_dir/project/boot/scala-2.9.1-1/lib/scala-library.jar; $1/"
-$hadoop fs -put $base_dir/project/boot/scala-2.9.1-1/lib/scala-library.jar $1/
+echo "$hadoop fs -put $base_dir/project/boot/scala-2.9.2/lib/scala-library.jar; $1/"
+$hadoop fs -put $base_dir/project/boot/scala-2.9.2/lib/scala-library.jar $1/
 
 local_dir=$(dirname $0)
 

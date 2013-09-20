@@ -37,7 +37,7 @@ row. To push data via Kafka, store to the Kafka URI using `AvroKafkaStorage`
 with the Avro schema as its first argument. You'll need to register the
 appropriate Kafka JARs. Here is what an example Pig script looks like:
 
-    REGISTER hadoop-producer_2.9.1-1-0.7.0.jar;
+    REGISTER hadoop-producer_2.9.2-0.7.0.jar;
     REGISTER avro-1.4.0.jar;
     REGISTER piggybank.jar;
     REGISTER kafka-0.7.0.jar;

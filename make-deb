@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# SCALA_VERSION=2.9.1-1
+# SCALA_VERSION=2.9.2
 
 # copy all jars
 

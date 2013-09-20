@@ -1,3 +1,9 @@
+kafka-server (0.7.2-3) stable; urgency=low
+
+  * Moved Kafka from Scala 2.9.1-1 to 2.9.2
+
+ -- Hisham Mardam-Bey <hisham@blackhowler>  Fri, 20 Sep 2013 16:00:58 -0400
+
 kafka-server (0.7.2-2) stable; urgency=low
 
   * Moved Kafka to ZooKeeper 3.4.5 and added slf4j dependencies (jars).

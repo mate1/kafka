@@ -4,22 +4,22 @@ debian/usr/bin/kafka-server /usr/bin
 
 debian/var/log/kafka /var/log
 
-lib_managed/scala_2.9.1-1/compile/apache-rat-core-0.8.jar /usr/share/kafka
-lib_managed/scala_2.9.1-1/compile/commons-lang-2.1.jar /usr/share/kafka
-lib_managed/scala_2.9.1-1/compile/apache-rat-0.8.jar /usr/share/kafka
-lib_managed/scala_2.9.1-1/compile/apache-rat-tasks-0.8.jar /usr/share/kafka
-lib_managed/scala_2.9.1-1/compile/commons-compress-1.0.jar /usr/share/kafka
-lib_managed/scala_2.9.1-1/compile/commons-collections-3.2.jar /usr/share/kafka
-lib_managed/scala_2.9.1-1/compile/commons-io-1.4.jar /usr/share/kafka
-lib_managed/scala_2.9.1-1/compile/commons-cli-1.2.jar /usr/share/kafka
-project/boot/scala-2.9.1-1/lib/scala-library.jar /usr/share/kafka
-project/boot/scala-2.9.1-1/lib/scala-compiler.jar /usr/share/kafka
-core/lib_managed/scala_2.9.1-1/compile/snappy-java-1.0.4.1.jar /usr/share/kafka
-core/lib_managed/scala_2.9.1-1/compile/log4j-1.2.15.jar /usr/share/kafka
-core/lib_managed/scala_2.9.1-1/compile/zkclient-0.1.jar /usr/share/kafka
-core/lib_managed/scala_2.9.1-1/compile/jopt-simple-3.2.jar /usr/share/kafka
-core/lib_managed/scala_2.9.1-1/compile/zookeeper-3.4.5.jar /usr/share/kafka
-core/lib_managed/scala_2.9.1-1/compile/slf4j-api-1.6.1.jar
-core/lib_managed/scala_2.9.1-1/compile/slf4j-log4j12-1.6.1.jar
+lib_managed/scala_2.9.2/compile/apache-rat-core-0.8.jar /usr/share/kafka
+lib_managed/scala_2.9.2/compile/commons-lang-2.1.jar /usr/share/kafka
+lib_managed/scala_2.9.2/compile/apache-rat-0.8.jar /usr/share/kafka
+lib_managed/scala_2.9.2/compile/apache-rat-tasks-0.8.jar /usr/share/kafka
+lib_managed/scala_2.9.2/compile/commons-compress-1.0.jar /usr/share/kafka
+lib_managed/scala_2.9.2/compile/commons-collections-3.2.jar /usr/share/kafka
+lib_managed/scala_2.9.2/compile/commons-io-1.4.jar /usr/share/kafka
+lib_managed/scala_2.9.2/compile/commons-cli-1.2.jar /usr/share/kafka
+project/boot/scala-2.9.2/lib/scala-library.jar /usr/share/kafka
+project/boot/scala-2.9.2/lib/scala-compiler.jar /usr/share/kafka
+core/lib_managed/scala_2.9.2/compile/snappy-java-1.0.4.1.jar /usr/share/kafka
+core/lib_managed/scala_2.9.2/compile/log4j-1.2.15.jar /usr/share/kafka
+core/lib_managed/scala_2.9.2/compile/zkclient-0.1.jar /usr/share/kafka
+core/lib_managed/scala_2.9.2/compile/jopt-simple-3.2.jar /usr/share/kafka
+core/lib_managed/scala_2.9.2/compile/zookeeper-3.4.5.jar /usr/share/kafka
+core/lib_managed/scala_2.9.2/compile/slf4j-api-1.6.1.jar
+core/lib_managed/scala_2.9.2/compile/slf4j-log4j12-1.6.1.jar
 
-core/target/scala_2.9.1-1/kafka-0.7.2.jar /usr/share/kafka
+core/target/scala_2.9.2/kafka-0.7.2.jar /usr/share/kafka

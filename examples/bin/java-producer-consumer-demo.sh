@@ -16,14 +16,14 @@
 
 base_dir=$(dirname $0)/../..
 
-for file in $base_dir/project/boot/scala-2.9.1-1/lib/*.jar;
+for file in $base_dir/project/boot/scala-2.9.2/lib/*.jar;
 do
   if [ ${file##*/} != "sbt-launch.jar" ]; then
     CLASSPATH=$CLASSPATH:$file
   fi
 done
 
-for file in $base_dir/core/lib_managed/scala_2.9.1-1/compile/*.jar;
+for file in $base_dir/core/lib_managed/scala_2.9.2/compile/*.jar;
 do
   CLASSPATH=$CLASSPATH:$file
 done
@@ -33,12 +33,12 @@ do
   CLASSPATH=$CLASSPATH:$file
 done
 
-for file in $base_dir/core/target/scala_2.9.1-1/*.jar;
+for file in $base_dir/core/target/scala_2.9.2/*.jar;
 do
   CLASSPATH=$CLASSPATH:$file
 done
 
-for file in $base_dir/examples/target/scala_2.9.1-1/*.jar;
+for file in $base_dir/examples/target/scala_2.9.2/*.jar;
 do
   CLASSPATH=$CLASSPATH:$file
 done
