@@ -16,10 +16,14 @@
  */
 
 import sbt._
-import scala.xml.{Node, Elem, NodeSeq}
+import scala.xml.{Node, Elem}
 import scala.xml.transform.{RewriteRule, RuleTransformer}
 
 class KafkaProject(info: ProjectInfo) extends ParentProject(info) with IdeaProject {
+  override def managedStyle = ManagedStyle.Maven
+  val publishTo = "Maven Repo" at "http://maven/content/repositories/repository.snapshots"
+  Credentials(Path.userHome / ".m2" / ".credentials", log)
+
   lazy val core = project("core", "core-kafka", new CoreKafkaProject(_))
   lazy val examples = project("examples", "java-examples", new KafkaExamplesProject(_), core)
   lazy val contrib = project("contrib", "contrib", new ContribProject(_))
@@ -52,15 +56,13 @@ class KafkaProject(info: ProjectInfo) extends ParentProject(info) with IdeaProje
       <exclude module="jmxtools"/>
       <exclude module="mail"/>
       <exclude module="jms"/>
-      <dependency org="org.apache.zookeeper" name="zookeeper" rev="3.4.5">
+      <dependency org="org.apache.zookeeper" name="zookeeper" rev="3.3.4">
         <exclude module="log4j"/>
         <exclude module="jline"/>
       </dependency>
-      <dependency org="com.github.sgroschupf" name="zkclient" rev="0.1">
-      </dependency>
     </dependencies>
 
-    override def artifactID = "kafka"
+    override def organization = "org.apache"
     override def filterScalaJars = false
 
     // build the executable jar's classpath.
@@ -118,7 +120,7 @@ class KafkaProject(info: ProjectInfo) extends ParentProject(info) with IdeaProje
     override def javaCompileOptions = super.javaCompileOptions ++
       List(JavaCompileOption("-source"), JavaCompileOption("1.5"))
 
-    override def packageAction = super.packageAction dependsOn (testCompileAction)
+    override def packageAction = super.packageAction dependsOn (testCompileAction, packageTestAction)
 
   }
 
@@ -191,7 +193,7 @@ class KafkaProject(info: ProjectInfo) extends ParentProject(info) with IdeaProje
          <dependency org="org.apache.hadoop" name="hadoop-core" rev="0.20.2">
            <exclude module="junit"/>
          </dependency>
-         <dependency org="org.apache.pig" name="pig" rev="0.8.0">
+         <dependency org="org.apache.pig" name="pig" rev="0.10.0">
            <exclude module="junit"/>
          </dependency>
        </dependencies>
@@ -226,12 +228,13 @@ class KafkaProject(info: ProjectInfo) extends ParentProject(info) with IdeaProje
   trait TestDependencies {
     val easymock = "org.easymock" % "easymock" % "3.0" % "test"
     val junit = "junit" % "junit" % "4.1" % "test"
-    val scalaTest = "org.scalatest" % "scalatest_2.9.2" % "1.6.1" % "test"
+    val scalaTest = "org.scalatest" % "scalatest" % "1.2" % "test"
   }
 
   trait CoreDependencies {
     val log4j = "log4j" % "log4j" % "1.2.15"
     val jopt = "net.sf.jopt-simple" % "jopt-simple" % "3.2"
+    val slf4jSimple = "org.slf4j" % "slf4j-simple" % "1.6.4"
   }
   
   trait HadoopDependencies {
@@ -245,5 +248,4 @@ class KafkaProject(info: ProjectInfo) extends ParentProject(info) with IdeaProje
   trait CompressionDependencies {
     val snappy = "org.xerial.snappy" % "snappy-java" % "1.0.4.1"	
   }
-
 }
