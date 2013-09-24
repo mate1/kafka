@@ -19,7 +19,10 @@ package kafka.log
 
 import java.io._
 import kafka.utils._
-import scala.actors.Actor
+import akka.actor.Actor
+import akka.actor.ActorRef
+import akka.actor.ActorSystem
+import akka.actor.ActorDSL._
 import scala.collection._
 import java.util.concurrent.CountDownLatch
 import kafka.server.{KafkaConfig, KafkaZooKeeper}
@@ -46,7 +49,8 @@ private[kafka] class LogManager(val config: KafkaConfig,
   private val logCreationLock = new Object
   private val random = new java.util.Random
   private var kafkaZookeeper: KafkaZooKeeper = null
-  private var zkActor: Actor = null
+  private implicit val system = ActorSystem("LogManager")
+  private var zkActor: ActorRef = null
   private val startupLatch: CountDownLatch = if (config.enableZookeeper) new CountDownLatch(1) else null
   private val logFlusherScheduler = new KafkaScheduler(1, "kafka-logflusher-", false)
   private val topicNameValidator = new TopicNameValidator(config)
@@ -91,25 +95,20 @@ private[kafka] class LogManager(val config: KafkaConfig,
   if(config.enableZookeeper) {
     kafkaZookeeper = new KafkaZooKeeper(config, this)
     kafkaZookeeper.startup
-    zkActor = new Actor {
-      def act() {
-        loop {
-          receive {
-            case topic: String =>
-              try {
-                kafkaZookeeper.registerTopicInZk(topic)
-              }
-              catch {
-                case e => error(e) // log it and let it go
-              }
-            case StopActor =>
-              info("zkActor stopped")
-              exit
-          }
-        }
+    zkActor = actor(new Act {
+      become {
+         case topic: String =>
+           try {
+             kafkaZookeeper.registerTopicInZk(topic)
+           } catch {
+             case e => error(e) // log it and let it go
+           }
+
+         case StopActor =>
+           info("zkActor stopped")
+           unbecome()
       }
-    }
-    zkActor.start
+    })
   }
 
   case object StopActor

@@ -41,9 +41,9 @@ object KafkaBuild extends Build {
   </license>
 </licenses>,
     scalacOptions ++= Seq("-deprecation", "-unchecked", "-g:none"),
-    crossScalaVersions := Seq("2.8.0","2.8.2", "2.9.1", "2.9.2", "2.10.1"),
+    crossScalaVersions := Seq("2.8.0","2.8.2", "2.9.1", "2.9.2", "2.10.1", "2.10.2"),
     excludeFilter in unmanagedSources <<= scalaVersion(v => if (v.startsWith("2.8")) "*_2.9+.scala" else "*_2.8.scala"),
-    scalaVersion := "2.9.2",
+    scalaVersion := "2.10.2",
     version := "0.7.2",
     publishTo := Some("Apache Maven Repo" at "https://repository.apache.org/service/local/staging/deploy/maven2"),
     credentials += Credentials(Path.userHome / ".m2" / ".credentials"),
@@ -53,10 +53,14 @@ object KafkaBuild extends Build {
     javacOptions ++= Seq("-Xlint:unchecked", "-source", "1.5"),
     parallelExecution in Test := false, // Prevent tests from overrunning each other
     libraryDependencies ++= Seq(
-      "log4j"                 % "log4j"        % "1.2.15" exclude("javax.jms", "jms"),
-      "net.sf.jopt-simple"    % "jopt-simple"  % "3.2",
-      "org.slf4j"             % "slf4j-simple" % "1.6.4",
-      "org.xerial.snappy"     % "snappy-java"  % "1.0.4.1"
+      "log4j"                 %  "log4j"          % "1.2.15" exclude("javax.jms", "jms"),
+      "net.sf.jopt-simple"    %  "jopt-simple"    % "3.2",
+      "org.slf4j"             %  "slf4j-simple"   % "1.6.4",
+      "org.xerial.snappy"     %  "snappy-java"    % "1.0.4.1",
+      "com.typesafe.akka"     %% "akka-actor"     % "2.2.1",
+      "junit"                 %  "junit"          % "4.1"   % "test",
+      "org.easymock"          %  "easymock"       % "3.0"   % "test",
+      "org.scalatest"         %  "scalatest_2.10" % "1.9.2" % "test"
     ),
     // The issue is going from log4j 1.2.14 to 1.2.15, the developers added some features which required
     // some dependencies on various sun and javax packages.

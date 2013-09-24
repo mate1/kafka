@@ -23,14 +23,14 @@ package kafka.utils
  * Indicates that the annotated class is meant to be threadsafe. For an abstract class it is an part of the interface that an implementation 
  * must respect
  */
-class threadsafe extends StaticAnnotation
+class threadsafe extends scala.annotation.StaticAnnotation
 
 /**
  * Indicates that the annotated class is not threadsafe
  */
-class nonthreadsafe extends StaticAnnotation
+class nonthreadsafe extends scala.annotation.StaticAnnotation
 
 /**
  * Indicates that the annotated class is immutable
  */
-class immutable extends StaticAnnotation
+class immutable extends scala.annotation.StaticAnnotation
