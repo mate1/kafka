@@ -1,0 +1,35 @@
+kafka (0.8.1-1) precise; urgency=low
+
+  * Using kafka 0.8.1. 
+
+ -- Francois Langelier <f.langelier@gmail.com>  Thu, 03 Apr 2014 16:51:56 -0400
+
+kafka (0.8.0-2) precise; urgency=low
+
+  * Adding support for setting ulimit open files.
+
+ -- Andrew Otto (WMF) <otto@wikimedia.org>  Wed, 05 Feb 2014 15:49:05 +0000
+
+kafka (0.8.0-1) precise; urgency=low
+
+  * Stable release of 0.8.0 tag.
+
+ -- Andrew Otto (WMF) <otto@wikimedia.org>  Wed, 04 Dec 2013 15:01:05 +0000
+
+kafka (0.8~20130913-1) precise; urgency=low
+
+  * Bumping version to reflect latest commit (aebf7461) in 0.8 branch.
+
+ -- Alexandros Kosiaris <akosiaris@wikimedia.org>  Wed, 09 Sep 2013 16:44:14 -0700
+
+kafka (0.8~20130827-1) precise; urgency=low
+
+  * Bumping version to reflect latest commit in 0.8 branch.
+
+ -- Alexandros Kosiaris <akosiaris@wikimedia.org>  Wed, 28 Aug 2013 16:50:14 +0000
+
+kafka (0.8~20130610-1) unstable; urgency=low
+
+  * Initial release.
+
+ -- Alexandros Kosiaris <akosiaris@wikimedia.org>  Wed, 29 May 2013 23:45:30 +0000
