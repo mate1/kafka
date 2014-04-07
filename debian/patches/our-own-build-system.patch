@@ -14,18 +14,18 @@ sane defaults are discovered but they should not be relied on too much.
 The version discovery system is rather naive and will fail in many
 cases to correctly identify the version. Since this is not trivial to
 fix we allow the caller to override version.
+
+Modify by: Francois Langelier <f.langelier@gmail.com> - Mate1 inc
+Date: Mon, 7 Apr 2014
+Building only the broker.
 ---
  Makefile                         |   66 ++++++++++++++++++++++++++++++++++++++
  config/Makefile                  |    9 ++++++
  core/Makefile                    |   20 ++++++++++++
- examples/Makefile                |   19 +++++++++++
- perf/Makefile                    |   20 ++++++++++++
  8 files changed, 197 insertions(+)
  create mode 100644 Makefile
  create mode 100644 config/Makefile
  create mode 100644 core/Makefile
- create mode 100644 examples/Makefile
- create mode 100644 perf/Makefile
 
 diff --git a/Makefile b/Makefile
 new file mode 100644
@@ -77,7 +77,7 @@ index 0000000..b2a9961
 +endif
 +export CFLAGS=-usejavacp
 +
-+SUBDIRS=core examples perf config
++SUBDIRS=core config
 +
 +BUILDDIRS=$(SUBDIRS:%=build-%)
 +CLEANDIRS=$(SUBDIRS:%=clean-%)
@@ -104,22 +104,17 @@ new file mode 100644
 index 0000000..211f667
 --- /dev/null
 +++ b/config/Makefile
-@@ -0,0 +1,15 @@
-+CONFFILES=log4j.properties tools-log4j.properties server.properties zookeeper.properties
-+MIRROR_CONFFILES=consumer.properties producer.properties
-+MIRROR_CONFFILES_EXAMPLES=$(MIRROR_CONFFILES:.properties=.properties.example)
+@@ -0,0 +1,9 @@
++CONFFILES=log4j.properties tools-log4j.properties server.properties
 +
 +all:
 +
 +clean:
 +
-+install:	all $(MIRROR_CONFFILES_EXAMPLES)
++install:
 +	$(MKDIR_P) $(DESTDIR)/$(SYSCONFDIR)
 +	$(INSTALL) -o root -g root $(CONFFILES) $(DESTDIR)/$(SYSCONFDIR)
-+	$(MKDIR_P) $(DESTDIR)/$(SYSCONFDIR)/mirror
 +%.properties.example:  %.properties
-+	$(MKDIR_P) $(DESTDIR)/$(SYSCONFDIR)/mirror
-+	$(INSTALL) -T -o root -g root $< $(DESTDIR)/$(SYSCONFDIR)/mirror/$@
 diff --git a/core/Makefile b/core/Makefile
 new file mode 100644
 index 0000000..7441725
@@ -146,55 +141,3 @@ index 0000000..7441725
 +install:
 +	$(JAR) cfv kafka-$(VERSION).jar -C target .
 +	$(INSTALL) -o root -g root kafka-$(VERSION).jar $(DESTDIR)$(LIBPATH)/kafka-$(VERSION).jar
-diff --git a/examples/Makefile b/examples/Makefile
-new file mode 100644
-index 0000000..8d5e751
---- /dev/null
-+++ b/examples/Makefile
-@@ -0,0 +1,19 @@
-+SOURCES=$(shell find -name "*.java")
-+
-+TARGET_PATH=$(CURDIR)/target
-+CORE_TARGET_PATH=$(dir $(CURDIR))core/target
-+CLASSPATH:=$(CLASSPATH):$(SCALA_LIBRARY):$(CORE_TARGET_PATH)
-+
-+$(TARGET_PATH):
-+	$(MKDIR_P) $(TARGET_PATH)
-+
-+all:	$(SOURCES) $(TARGET_PATH)
-+	$(JAVAC) -d $(TARGET_PATH) $(SOURCES)
-+
-+clean:
-+	$(RM_RF) $(TARGET_PATH)
-+	$(RM_RF) kafka-java-examples-$(VERSION).jar
-+
-+install:	all
-+	$(JAR) cfv kafka-java-examples-$(VERSION).jar -C target .
-+	$(INSTALL) -o root -g root kafka-java-examples-$(VERSION).jar $(DESTDIR)$(LIBPATH)/kafka-java-examples-$(VERSION).jar
-diff --git a/perf/Makefile b/perf/Makefile
-new file mode 100644
-index 0000000..daeea0d
---- /dev/null
-+++ b/perf/Makefile
-@@ -0,0 +1,20 @@
-+SOURCES=$(shell find -name "*.scala" -or -name "*.java")
-+
-+TARGET_PATH=$(CURDIR)/target
-+
-+CORE_TARGET_PATH=$(dir $(CURDIR))core/target
-+CLASSPATH:=$(CLASSPATH):$(CORE_TARGET_PATH)
-+
-+$(TARGET_PATH):
-+	$(MKDIR_P) $(TARGET_PATH)
-+
-+all:	$(SOURCES) $(TARGET_PATH)
-+	$(SCALAC) $(CFLAGS) -d $(TARGET_PATH) $(SOURCES)
-+
-+clean:
-+	$(RM_RF) $(TARGET_PATH)
-+	$(RM_RF) kafka-perf-$(VERSION).jar
-+
-+install:	all
-+	$(JAR) cfv kafka-perf-$(VERSION).jar -C target .
-+	$(INSTALL) -o root -g root kafka-perf-$(VERSION).jar $(DESTDIR)$(LIBPATH)/kafka-perf-$(VERSION).jar
--- 
