@@ -3,6 +3,5 @@ ext/metrics-core-2.2.0.jar
 ext/slf4j-api-1.7.2.jar
 ext/zkclient-0.3.jar
 ext/log4j-1.2.15.jar
-ext/scala-library-2.9.1.jar
 ext/snappy-java-1.0.5.jar
 ext/zookeeper-3.3.4.jar

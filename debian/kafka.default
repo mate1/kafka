@@ -1,5 +1,5 @@
 # whether to allow init.d script to start a kafka broker ("yes", "no")
-KAFKA_START=yes
+KAFKA_START=no
 
 # User and group to run as
 KAFKA_USER=kafka
