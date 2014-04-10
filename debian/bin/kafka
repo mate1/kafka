@@ -29,6 +29,8 @@ Commands:
   $SCRIPT_NAME delete-topic               [opts]
   $SCRIPT_NAME list-topic                 [opts]
   $SCRIPT_NAME describe-topic             [opts]
+  $SCRIPT_NAME alter-topic                [opts]
+  $SCRIPT_NAME topic                      [opts]
 
   $SCRIPT_NAME consumer-offset-checker    [opts]
 
@@ -137,6 +139,14 @@ cmd_describe_topic() {
     kafka_run_class kafka.admin.TopicCommand --describe $ZOOKEEPER_OPT $@
 }
 
+cmd_alter_topic() {
+    kafka_run_class kafka.admin.TopicCommand --alter $ZOOKEEPER_OPT $@
+}
+
+cmd_topic() {
+    kafka_run_class kafka.admin.TopicCommand $ZOOKEEPER_OPT $@
+}
+
 cmd_console_producer() {
     export JMX_PORT=${JMX_PORT:-9990}
     export KAFKA_HEAP_OPTS=${KAFKA_HEAP_OPTS:-"-Xmx512M"}
@@ -222,6 +232,8 @@ do
     delete-topic                    | \
     list-topic                      | \
     describe-topic                  | \
+    alter-topic                     | \
+    topic                           | \
     console-producer                | \
     console-consumer                | \
     simple-consumer-shell           | \
