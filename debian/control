@@ -1,0 +1,14 @@
+Source: kafka
+Section: misc
+Priority: extra
+Maintainer: Francois Langelier <f.langelier@gmail.com>
+Build-Depends: debhelper (>= 8.0.0)
+Standards-Version: 3.9.3
+Homepage: http://kafka.apache.org
+
+Package: kafka
+Architecture: all
+Depends: ${misc:Depends}, sun-java6-jre
+Description: Distributed durable message queuing system.
+ Apache Kafka is a distributed message queuig system
+ that uses ZooKeeper to manage brokers.

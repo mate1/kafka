@@ -1,0 +1,23 @@
+kafka (0.8.1.1-1) stable; urgency=low
+
+  * Update to kafka 0.8.1.1
+
+ -- Francois Langelier <f.langelier@gmail.com>  Fri, 13 Jun 2014 16:00:58 -0400
+
+kafka-server (0.7.2-3) stable; urgency=low
+
+  * Moved Kafka from Scala 2.9.1-1 to 2.9.2
+
+ -- Hisham Mardam-Bey <hisham@blackhowler>  Fri, 20 Sep 2013 16:00:58 -0400
+
+kafka-server (0.7.2-2) stable; urgency=low
+
+  * Moved Kafka to ZooKeeper 3.4.5 and added slf4j dependencies (jars).
+
+ -- Hisham Mardam-Bey <hisham.mardambey@gmail.com>  Fri, 13 Sep 2013 14:24:49 -0400
+
+kafka-server (0.7.2-1) stable; urgency=low
+
+  * Initial release 
+
+ -- Hisham Mardam-Bey <hisham.mardambey@gmail.com>  Thu, 25 Jul 2013 20:38:43 -0400

@@ -1,0 +1,14 @@
+debian/etc/kafka /etc
+debian/usr/bin/kafka /usr/bin
+debian/var/log/kafka /var/log
+
+core/build/dependant-libs-2.9.2/jopt-simple-3.2.jar /usr/share/kafka
+core/build/dependant-libs-2.9.2/log4j-1.2.15.jar /usr/share/kafka
+core/build/dependant-libs-2.9.2/metrics-core-2.2.0.jar /usr/share/kafka
+core/build/dependant-libs-2.9.2/scala-library-2.9.2.jar /usr/share/kafka
+core/build/dependant-libs-2.9.2/slf4j-api-1.7.2.jar /usr/share/kafka
+core/build/dependant-libs-2.9.2/snappy-java-1.0.5.jar /usr/share/kafka
+core/build/dependant-libs-2.9.2/zkclient-0.3.jar /usr/share/kafka
+core/build/dependant-libs-2.9.2/zookeeper-3.3.4.jar /usr/share/kafka
+
+core/build/libs/kafka_2.9.2-0.8.1.1.jar /usr/share/kafka

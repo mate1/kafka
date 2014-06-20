@@ -1,0 +1,23 @@
+#!/bin/bash
+
+# SCALA_VERSION=2.9.2
+
+# copy all jars
+
+#cp \
+#	$(find lib_managed project/boot/scala-$SCALA_VERSION core/lib_managed/scala_$SCALA_VERSION/compile -name \*.jar) \
+#	debian/usr/lib/kafka
+
+# copy a reference of the latest config files
+
+#cp debian/etc/kafka/log4j.properties debian/etc/kafka/server.properties debian/usr/share/doc/kafka
+
+kafka_dir=${PWD##*/}
+
+./gradlew -PscalaVersion=2.9.2 jar
+
+pushd ../
+tar czvf kafka_0.8.1.1.orig.tar.gz --exclude=".git*" $kafka_dir
+popd
+
+debuild -us -uc -i.git

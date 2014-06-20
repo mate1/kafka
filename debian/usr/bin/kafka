@@ -1,0 +1,77 @@
+#!/bin/bash
+# Licensed to the Apache Software Foundation (ASF) under one or more
+# contributor license agreements.  See the NOTICE file distributed with
+# this work for additional information regarding copyright ownership.
+# The ASF licenses this file to You under the Apache License, Version 2.0
+# (the "License"); you may not use this file except in compliance with
+# the License.  You may obtain a copy of the License at
+# 
+#    http://www.apache.org/licenses/LICENSE-2.0
+# 
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+export JMX_PORT=${JMX_PORT:-9999}
+
+KAFKA_OUT=/var/log/kafka/kafka.out
+PID_FILE=/var/run/kafka/kafka.pid
+for file in /usr/share/kafka/*.jar;
+do
+  CLASSPATH=$CLASSPATH:$file
+done
+
+if [ -z "$KAFKA_JMX_OPTS" ]; then
+  KAFKA_JMX_OPTS="-Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.authenticate=false  -Dcom.sun.management.jmxremote.ssl=false "
+fi
+if [ -z "$KAFKA_OPTS" ]; then
+  KAFKA_OPTS="-Xmx512M -server  -Dlog4j.configuration=file:/etc/kafka/log4j.properties"
+fi
+if [  $JMX_PORT ]; then
+  KAFKA_JMX_OPTS="$KAFKA_JMX_OPTS -Dcom.sun.management.jmxremote.port=$JMX_PORT "
+fi
+if [ -z "$JAVA_HOME" ]; then
+  JAVA="java"
+else
+  JAVA="$JAVA_HOME/bin/java"
+fi
+
+start() {
+	nohup $JAVA $KAFKA_OPTS $KAFKA_JMX_OPTS -cp $CLASSPATH kafka.Kafka /etc/kafka/server.properties > "$KAFKA_OUT" 2>&1 &
+	PID=$!
+	echo $PID > $PID_FILE
+}
+
+stop() {
+	local pid
+
+	pid=`cat "$PID_FILE" 2>/dev/null`
+
+	if [ "$pid" = '' ]; then
+		# The file probably does not exist or is empty. Success
+		return 0
+	fi
+
+	set -- $pid
+	pid="$1"
+
+	kill -15 "$pid"
+}
+
+case "$1" in
+	start)
+		start
+		;;
+
+	stop)
+		stop
+		;;
+
+	*)
+		echo "Usage: $0 (start|stop)"
+		exit 1
+		;;
+esac
+
